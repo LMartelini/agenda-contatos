@@ -27,6 +27,9 @@ const submit = () => {
         onFinish: () => form.reset('password'),
     });
 };
+
+const buttonsLogIn = "py-2 w-full rounded shadow-lg text-sm";
+
 </script>
 
 <template>
@@ -37,9 +40,14 @@ const submit = () => {
             {{ status }}
         </div>
 
+        <div class="mb-4 flex flex-col gap-1">
+            <h1 class="font-bold text-xl">Welcome back</h1>
+            <p class="text-sm text-gray-400">Sign in to manage your contacts</p>
+        </div>
+
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="Email Address" />
 
                 <TextInput
                     id="email"
@@ -49,6 +57,7 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="username"
+                    placeholder="you@example.com"
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
@@ -64,6 +73,7 @@ const submit = () => {
                     v-model="form.password"
                     required
                     autocomplete="current-password"
+                    placeholder=".........."
                 />
 
                 <InputError class="mt-2" :message="form.errors.password" />
@@ -78,23 +88,29 @@ const submit = () => {
                 </label>
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
+            <div class="mt-4 flex flex-col gap-2">
+                <button
+                    :class="[
+                        'bg-blue-600 text-white hover:bg-blue-700',
+                        buttonsLogIn,
+                        form.processing && 'opacity-25'
+                    ]"
+                    :disabled="form.processing"
+                >
+                    Sign in
+                </button>
+
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    class="rounded-md font-semibold text-sm text-center text-blue-600 hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                     Forgot your password?
                 </Link>
-
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Log in
-                </PrimaryButton>
             </div>
         </form>
+
+    
     </GuestLayout>
+
 </template>
