@@ -33,7 +33,7 @@ const buttonsLogIn = "py-2 w-full rounded shadow-lg text-sm";
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestLayout :register="false">
         <Head title="Log in" />
 
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
@@ -109,8 +109,6 @@ const buttonsLogIn = "py-2 w-full rounded shadow-lg text-sm";
                 </Link>
             </div>
         </form>
-
-    
     </GuestLayout>
 
 </template>

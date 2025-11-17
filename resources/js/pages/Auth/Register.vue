@@ -21,12 +21,12 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestLayout :register="true">
         <Head title="Register" />
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Full Name" />
 
                 <TextInput
                     id="name"
@@ -36,13 +36,14 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="name"
+                    placeholder="John Doe"
                 />
 
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
 
             <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="Email Address" />
 
                 <TextInput
                     id="email"
@@ -51,6 +52,7 @@ const submit = () => {
                     v-model="form.email"
                     required
                     autocomplete="username"
+                    placeholder="you@example.com"
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
@@ -66,6 +68,7 @@ const submit = () => {
                     v-model="form.password"
                     required
                     autocomplete="new-password"
+                    placeholder="................"
                 />
 
                 <InputError class="mt-2" :message="form.errors.password" />
@@ -84,6 +87,7 @@ const submit = () => {
                     v-model="form.password_confirmation"
                     required
                     autocomplete="new-password"
+                    placeholder="................"
                 />
 
                 <InputError
@@ -92,21 +96,16 @@ const submit = () => {
                 />
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    :href="route('login')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Already registered?
-                </Link>
-
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
+            <div class="mt-4">
+                <button
+                    :class="[
+                        'bg-blue-600 text-white hover:bg-blue-700 py-2 w-full rounded-md shadow-lg text-sm',
+                        form.processing && 'opacity-25'
+                    ]"
                     :disabled="form.processing"
                 >
-                    Register
-                </PrimaryButton>
+                    Create Account
+                </button>
             </div>
         </form>
     </GuestLayout>
