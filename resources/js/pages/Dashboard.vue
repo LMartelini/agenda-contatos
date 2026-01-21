@@ -1,5 +1,5 @@
 <script setup>
-    import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+    import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
     import { Head } from '@inertiajs/vue3';
 
     const buttonFilters = "rounded-full py-2 px-4 text-gray-800 bg-gray-200 font-medium hover:text-white";
@@ -10,6 +10,10 @@
         { background: "hover:bg-green-600", label: "Friends" },
         { background: "hover:bg-orange-600", label: "Other" },
     ];
+
+    const props = defineProps({
+       clientes: Object 
+    });
 
 </script>
 
@@ -56,6 +60,30 @@
                     >
                         {{ btn.label }}
                     </button>
+
+                </div>
+                
+                <div
+                    class="grid grid-cols-3 gap-4"
+                >
+                    <div
+                        v-for="cliente in clientes" :key="cliente.id"
+                        class="p-4 bg-white border border-solid border-gray-200 shadow-md rounded-md flex flex-col"
+                    >
+                        <div class="flex justify-between">
+                            <p class="font-semibold text-lg">{{ cliente.first_name }}</p>
+                            <div class="flex gap-2">
+                                <button>Editar</button>
+                                <button>Excluir</button>
+                            </div>
+                        </div>
+                        <span class="text-sm">{{ cliente.category.name }}</span>
+                        <span>{{ cliente.email }}</span>
+                        <span>{{ cliente.phone }}</span>
+                        <span v-if="cliente.company_name">{{ cliente.company_name }}</span>
+                        <hr>
+                        <span>{{ cliente.notes }}</span>
+                    </div>
                 </div>
             </div>
         </div>
