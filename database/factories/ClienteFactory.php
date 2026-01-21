@@ -21,13 +21,13 @@ class ClienteFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_id' => Categoria::factory(),
+            'category_id' => Categoria::query()->value('id'),
             'first_name' => $this->faker->name(),
             'last_name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'company_name' => null,
-            'notes' => $this->faker->text(),
+            'notes' => $this->faker->text(20),
         ];
     }
 }

@@ -20,23 +20,39 @@ class CategoriaFactory extends Factory
     
     public function definition(): array
     {
-        $colors = [
-            '#1591EA',
-            '#FF2C2C',
-            '#50C878',
-            '#DB9D00',
-            '#7F00FF',
-            '#FC608F',
-            '#00B9B3',
-            '#8AC850',
-            '#FF7518',
-            '#0e4aa4'
-        ];
+        return [];
+    }
 
-        return [
-            'name' => $this->faker->name(),
-            'color' => $this->faker->randomElement($colors)
-        ];
+    public function family()
+    {
+        return $this->state([
+            'name' => 'Family',
+            'color' => '#1591EA'
+        ]);
+    }
+
+    public function friends()
+    {
+        return $this->state([
+            'name' => 'Friends',
+            'color' => '#50C878'
+        ]);
+    }
+
+    public function work()
+    {
+        return $this->state([
+            'name' => 'Work',
+            'color' => '#FF2C2C'
+        ]);
+    }
+
+    public function other()
+    {
+        return $this->state([
+            'name' => 'other',
+            'color' => '#DB9D00'
+        ]);
     }
 }
 
